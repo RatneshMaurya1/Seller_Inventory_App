@@ -3,6 +3,7 @@ const User = require("../models/user.schema");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken")
 const userRouter = express.Router();
+const userAuth = require("../middlewares/userAuth")
 
 userRouter.post("/signup", async (req, res) => {
   try {
@@ -77,5 +78,14 @@ userRouter.post("/signin", async (req, res) => {
     });
   }
 });
+
+userRouter.get("/validate",userAuth,(req,res) => {
+    try {
+        const user = req.user
+        return res.status(200).json({message:"user validated successfully",user:{email:user.email}})
+    } catch (error) {
+        res.status(401).json({ error: "Invalid token" })
+    }
+})
 
 module.exports = userRouter;
