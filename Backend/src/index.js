@@ -4,6 +4,10 @@ const connectDB = require("./config/db")
 const PORT = process.env.PORT
 const app = express()
 
+app.use(express.json())
+
+app.use("/api",require("./router/userRouter"))
+
 app.get("/",(req,res) => {
     res.send("Ratnesh Maurya")
 })
