@@ -8,6 +8,7 @@ app.use(express.json())
 
 app.use("/api",require("./router/userRouter"))
 app.use("/api",require("./router/productRouter"))
+app.use("/api",require("./router/buyerRouter"))
 
 app.get("/",(req,res) => {
     res.send("Ratnesh Maurya")
