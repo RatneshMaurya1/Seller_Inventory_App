@@ -27,6 +27,10 @@ const productSchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
+    }
   },
   { timestamps: true }
 );
