@@ -7,8 +7,8 @@ const userAuth = require("../middlewares/userAuth")
 
 userRouter.post("/signup", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { name,email, password } = req.body;
+    if (!name || !email || !password) {
       return res
         .status(400)
         .json({ message: "email and password are required" });
@@ -37,12 +37,13 @@ userRouter.post("/signup", async (req, res) => {
     }
     const hashPassword = await bcrypt.hash(password, 10);
     const user = new User({
+      name,
       email,
       password: hashPassword,
     });
 
     await user.save();
-    return res.status(201).json({ message: "Sign up successfully", user });
+    return res.status(201).json({ message: "Sign up successfully", user:{name:user.name,email:user.email} });
   } catch (error) {
     return res.status(500).json({
       message: "An error occurred during signup",
@@ -69,7 +70,7 @@ userRouter.post("/signin", async (req, res) => {
       res.status(400).json({ message: "Invalid email or password." });
     }
     const token = JWT.sign({ email }, process.env.JWT_SECRET);
-    return res.json({ message: "Logged in successfully", user:{email:user.email}, token });
+    return res.json({ message: "Logged in successfully", user:{name:user.name,email:user.email}, token });
   } catch (error) {
     return res.status(500).json({
       message: "An error occurred during signin",
@@ -82,7 +83,7 @@ userRouter.post("/signin", async (req, res) => {
 userRouter.get("/validate",userAuth,(req,res) => {
     try {
         const user = req.user
-        return res.status(200).json({message:"user validated successfully",user:{email:user.email}})
+        return res.status(200).json({message:"user validated successfully",user:{name:user.name,email:user.email}})
     } catch (error) {
         res.status(401).json({ error: "Invalid token" })
     }
