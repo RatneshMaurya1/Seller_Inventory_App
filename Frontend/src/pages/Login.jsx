@@ -25,7 +25,6 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSignup) {
-      console.log("Signup data:", formData);
       if (
         !formData.name.trim() ||
         !formData.email.trim() ||
@@ -62,10 +61,6 @@ export default function LoginPage() {
         setLoading(false);
       }
     } else {
-      console.log("Login data:", {
-        email: formData.email,
-        password: formData.password,
-      });
       setLoading(true)
       try {
         const response = await userSignIn(formData)

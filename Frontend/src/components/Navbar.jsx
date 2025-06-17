@@ -17,7 +17,7 @@ export default function Navbar({ user }) {
           </>
         ) : (
           <span className="text-lg font-medium text-gray-700">
-            Welcome, {user.name}
+            Welcome, {user.name.split(" ")[0]}
           </span>
         )}
       </div>

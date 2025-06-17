@@ -55,7 +55,7 @@ buyerRouter.patch("/buyer/:id",userAuth, async (req, res) => {
       return res.status(404).json({ error: "Buyer not found" });
     }
 
-    res.json(updated);
+    res.json({message:"Buyer updated successfully",updated});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

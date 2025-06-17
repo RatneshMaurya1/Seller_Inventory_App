@@ -20,8 +20,7 @@ productRouter.post("/products",userAuth, async (req, res) => {
     const user = req.user;
     const userId = user.id
     const { id, name, price, quantity, MRP, } = req.body;
-
-    if (!id || !name || price == null || quantity == null || MRP == null || !userId) {
+    if (!id || !name || !price || !quantity || !MRP || !userId) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -32,7 +31,7 @@ productRouter.post("/products",userAuth, async (req, res) => {
 
     const product = new Product({ id, name, price, quantity, MRP, userId });
     await product.save();
-    res.status(201).json(product);
+    res.status(201).json({message:"Product added successfully",product});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -51,7 +50,7 @@ productRouter.patch("/products/:id",userAuth, async (req, res) => {
       return res.status(404).json({ error: "Product not found" });
     }
 
-    res.json(updated);
+    res.json({message:"Product updated successfully",updated});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

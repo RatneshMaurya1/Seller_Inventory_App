@@ -7,7 +7,7 @@ const orderSchema = new mongoose.Schema({
   },
   buyerId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Buyer",
     default: null,
   },
   items: [

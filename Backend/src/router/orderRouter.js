@@ -57,7 +57,7 @@ orderRouter.post("/order", userAuth, async (req, res) => {
     });
 
     await newOrder.save();
-    res.status(201).json(newOrder);
+    res.status(201).json({message:"Order placed successfully",newOrder});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
