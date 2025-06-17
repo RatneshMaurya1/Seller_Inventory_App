@@ -27,7 +27,6 @@ export default function Layout() {
       <Sidebar />
       <main className="flex-1 bg-gray-100">
         <Navbar user={user}/>
-
         <Outlet /> 
       </main>
     </div>
